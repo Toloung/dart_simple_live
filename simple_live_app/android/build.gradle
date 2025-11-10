@@ -13,12 +13,11 @@ subprojects {
     project.evaluationDependsOn(":app")
 }
 
-// 👇 新增这一段，统一压成 34，绕开坏掉的 35 / 36
 subprojects { subproject ->
-    afterEvaluate {
-        if (subproject.hasProperty("android")) {
-            subproject.android {
-                // 老版插件用 compileSdkVersion，新版用 compileSdk，都兼容
+    subproject.afterEvaluate { proj ->
+        if (proj.hasProperty("android")) {
+            proj.android {
+                // 统一用 34，绕开坏掉的 android-36
                 compileSdkVersion 34
             }
         }
