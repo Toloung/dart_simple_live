@@ -13,17 +13,6 @@ subprojects {
     project.evaluationDependsOn(":app")
 }
 
-subprojects { subproject ->
-    subproject.afterEvaluate { proj ->
-        if (proj.hasProperty("android")) {
-            proj.android {
-                // 统一用 34，绕开坏掉的 android-36
-                compileSdkVersion 34
-            }
-        }
-    }
-}
-
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
